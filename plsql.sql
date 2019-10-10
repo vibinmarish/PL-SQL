@@ -84,5 +84,41 @@ end loop;
 end;
 / 
 
-9
+9--UPDATE ROW IN A TABLE
+set serveroutput on;
+begin
+update emp set sal=sal+50;
+end;
+/ 
 
+10--CURSOR EXAMPLE
+ set serveroutput on;
+ declare 
+ id emp.empno%type;
+ name emp.ename%type;
+ cursor empdets is select empno, ename from emp;
+ begin
+ open empdets;
+ loop
+ fetch empdets into id,name;
+ exit when empdets %notfound;
+ dbms_output.put_line(id||' '||name);
+ end loop;
+ close empdets;
+ end;
+ /
+ 
+11--DISPLAY NAME OF PEOPLE WITH SALARY >3000
+set serveroutput on;
+declare
+name emp.ename%type;
+cursor curname is select ename from emp where sal>3000;  
+begin
+open curname;
+loop
+fetch curname into name;
+exit when curname %notfound;
+dbms_output.put_line(name);
+end loop;
+end;
+/
