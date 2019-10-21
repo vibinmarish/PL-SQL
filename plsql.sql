@@ -122,3 +122,60 @@ dbms_output.put_line(name);
 end loop;
 end;
 /
+
+12--CREATE A TRIGGER
+set serveroutput on;
+create or replace trigger vibin
+before update on emp
+begin
+dbms_output.put_line('Update statement is excecuting');
+end;
+/
+
+13--CREATE A TRIGGER THAT SHOWS THE OLD AND NEW SALARY AFTER UPDATING
+set serveroutput on;
+create or replace trigger  trig 
+after update of sal on emp
+FOR EACH ROW
+begin
+dbms_output.put_line('Old Salary'||:OLD.sal);
+dbms_output.put_line('New Salary'||:NEW.sal);
+end;
+/
+
+14--CREATE A PROCEDURE
+set serveroutput on
+create or replace procedure vibin is
+begin
+dbms_output.put_line('Hello World');
+end;
+/
+
+15--CREATE A PROCEDURE TO ADD TWO SALARY FROM TABLE
+set serveroutput on
+create or replace procedure marish 
+AS
+num1 emp.sal%type;
+num2 emp.sal%type;
+total emp.sal%type;
+begin
+total:='&total';
+select sal into num1 from emp where ename='VIBIN';
+select sal into num2 from emp where ename ='ADAMS';
+
+total:= num1+num2;
+dbms_output.put_line('Sum of Vibin and Adam is'|| total);
+end;
+/
+
+16--CREATE A FUNCTION
+set serveroutput on
+create or replace function vib(num1 number ,num2 number)
+return number
+is
+sums number;
+begin
+sums:= num1+num2;
+return sums;
+end ;
+/
