@@ -179,3 +179,10 @@ sums:= num1+num2;
 return sums;
 end ;
 /
+
+17--CREATE A USER DEFINED TYPE
+create or replace type marks as object
+(
+ENGLISH NUMBER,
+JAVA NUMBER
+);
